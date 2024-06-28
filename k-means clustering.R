@@ -7,15 +7,12 @@ class(data)
 # remove the first column as it represents the row number.
 data = data[, -1]
 head(data)
-# tip: Before Appling dataset to K-means clustering you should better scale your data
+## scaling the data
 data = scale(data)
 class(data)
-# Becuase the output of scale function is 'matrix''array', I transform it to dataframe
-
 data = as.data.frame(data)
-# let me show you the scatter plot between x, y, and latter applying it to k-means
+## elbow method
 library(ggplot2)
-
 ggplot(data, aes(x, y)) + 
   geom_point() +  
   theme(
@@ -25,15 +22,16 @@ ggplot(data, aes(x, y)) +
 # In Kmeans Algorithm we have to define the number of Cluster which represent with k
 # fortunatly in R, We have some intersting functions for selecting k.
 library(factoextra)
-
+## elbow method for optimal number of clusters
 fviz_nbclust(data, kmeans, method = "wss")
 # method can be = 'gap_stat', 'wss', 'silhouette'
 set.seed(123) # set seed for all of us get the same result
 km <- kmeans(data, 2)
 km
+## visualizing the clusters 
 fviz_cluster(km, data = data,
              palette = c("yellow", "skyblue"),
-             ellipse.type = "ellipse", # Concentration ellipse
+             ellipse.type = "eucloid", # Concentration ellipse
              star.plot = TRUE, # Add segments from centroids to items
              repel = TRUE, # Avoid label overplotting (slow)
              ggtheme = theme_minimal())
