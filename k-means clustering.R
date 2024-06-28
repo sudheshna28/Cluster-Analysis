@@ -19,8 +19,7 @@ ggplot(data, aes(x, y)) +
     axis.title.x = element_text(size = 20),
     axis.text.x = element_text(size = 20),
     axis.title.y = element_text(size = 20))
-# In Kmeans Algorithm we have to define the number of Cluster which represent with k
-# fortunatly in R, We have some intersting functions for selecting k.
+# In Kmeans Algorithm we have to define the number of Cluster which represent the  k
 library(factoextra)
 ## elbow method for optimal number of clusters
 fviz_nbclust(data, kmeans, method = "wss")
